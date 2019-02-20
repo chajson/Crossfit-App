@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>Crossfit App</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="masthead mb-auto">
+            <div class="inner">
+                <h3 class="masthead-brand">PrzeCROSS granice</h3>
+                <nav class="nav nav-masthead justify-content-center">
+                    {{#if user}}
+                        <a class="nav-link active" href="/users/dashboard">Twoje treningi</a>
+                        <a class="nav-link" href="/users/logout">Log out</a>
+                        <h6 class="nav-link">Zalogowano jako: {{user.username}}</h6>
+                    {{else}}
+                        <a class="nav-link active" href="/users/home">Home</a>
+                        <a class="nav-link" href="/users/login">Log in</a>
+                        <a class="nav-link" href="/users/register">Register</a>
+                    {{/if}}
+
+                </nav>
+            </div>
+        </header>
+
+        <main role="main" class="inner cover">
+            {{#if success_msg}}
+                <div class="alert alert-success">{{success_msg}}</div>
+            {{/if}}
+            {{#if error_msg}}
+                <div class="alert alert-danger">{{error_msg}}</div>
+            {{/if}}
+            {{#if error}}
+                <div class="alert alert-danger">{{error}}</div>
+            {{/if}}
+            {{{body}}}
+        </main>
+
+        <footer class="mastfoot mt-auto">
+            <div class="inner">
+                <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+            </div>
+        </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script>
+        const exList = document.querySelector('.excersises');
+        const addItems = document.querySelector('.add-items');
+        const items = [];
+
+        function addItem(e) {
+            e.preventDefault();
+            const text = (this.querySelector('[name=item]')).value;
+            const item = {
+                text: text
+            };
+
+            items.push(item);
+            pushToList(items, exList);
+            this.reset();
+
+        }
+
+        function pushToList(items = [], itemsList) {
+            itemsList.innerHTML = items.map((exer, i) => {
+                return `
+<li>
+<label for="">${exer.text}</label>
+</li>
+`;
+            }).join('');
+        }
+
+
+        addItems.addEventListener('submit', addItem);
+
+    </script>
+</body>
+
+</html>
