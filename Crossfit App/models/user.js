@@ -2,20 +2,10 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const Schema = mongoose.Schema;
 
-const TimeSchema = new Schema({
-    type: Number
+const WodSchema = new Schema({
+    exercise: [String],
+    time: [Number]
 });
-
-const ExerciseSchema = new Schema({
-    type: String
-});
-
-//Training Schema
-const TrainingSchema = new Schema({
-    exercises: [ExerciseSchema],
-    time: [TimeSchema]
-});
-
 //User Schema
 const UserSchema = new Schema({
     username: {
@@ -28,10 +18,13 @@ const UserSchema = new Schema({
     password: {
         type: String
     },
-    trainings: [TrainingSchema]
+    wods: [
+         WodSchema
+    ]
 });
 
 const User = module.exports = mongoose.model('User', UserSchema);
+module.exports = User;
 
 module.exports.createUser = function (newUser, callback) {
     bcrypt.genSalt(10, function (err, salt) {

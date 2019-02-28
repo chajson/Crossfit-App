@@ -25,6 +25,10 @@ router.get('/update', function (req, res) {
     res.render('update');
 });
 
+router.get('/add_time', function (req, res) {
+    res.render('add_time');
+});
+
 
 
 //Register User
@@ -50,7 +54,8 @@ router.post('/register', function (req, res) {
         var newUser = new User({
             email: email,
             username: username,
-            password: password
+            password: password,
+            wods: []
         });
 
         User.createUser(newUser, function (err, user) {
@@ -62,6 +67,7 @@ router.post('/register', function (req, res) {
 
         res.redirect('/users/login');
     }
+
 });
 
 passport.use(new LocalStrategy({
@@ -120,13 +126,24 @@ router.get('/logout', function (req, res) {
 });
 
 //creating new training
-const exercise = req.body.
-router.post('/training', function(req, res){
-   const exercise = req.body.item;
+router.post('/NewWOD', function (req, res) {
+    var user = req.user;
+    var username = user.username;
+    var exercises = req.body.item;
 
-    
-    
+
+    User.findOne({
+        username: username
+    }).then(function (record) {
+        record.wods.push({
+            exercise: exercises,
+            time: []
+        });
+        record.save();
+    });
+    req.flash('success_msg', 'Trening został dodany');
+    res.redirect('/users/dashboard');
 });
-           
+
 
 module.exports = router;
