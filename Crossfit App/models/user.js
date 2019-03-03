@@ -3,7 +3,9 @@ const bcrypt = require('bcryptjs');
 const Schema = mongoose.Schema;
 
 const WodSchema = new Schema({
-    exercise: [String],
+    exercise: {
+        type: String
+    },
     time: [Number]
 });
 //User Schema

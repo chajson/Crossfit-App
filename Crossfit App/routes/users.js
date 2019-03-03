@@ -141,9 +141,13 @@ router.post('/NewWOD', function (req, res) {
         });
         record.save();
     });
-    req.flash('success_msg', 'Trening został dodany');
+    req.flash('success_msg', 'Trening został dodany!');
     res.redirect('/users/dashboard');
 });
 
+router.get('/add_time', function(req, res){
+    var user = req.user;
+    var wods = u
+});
 
 module.exports = router;
