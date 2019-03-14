@@ -12,10 +12,15 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/crossfitapp');
 var db = mongoose.connction;
+var Handlebars = require('handlebars');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+Handlebars.registerHelper("inc", function(value, options)
+{
+    return parseInt(value) + 1;
+});
 
 //init app
 var app = express();

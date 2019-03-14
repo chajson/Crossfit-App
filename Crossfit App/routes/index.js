@@ -3,7 +3,8 @@ var router = express.Router();
 
 //Get Homepage
 router.get('/users/dashboard', ensureAuthenticated, function(req, res){
-   res.render('dashboard'); 
+   res.render('dashboard',  {dashboard: true}); 
+
 });
 
 function ensureAuthenticated(req,res,next){

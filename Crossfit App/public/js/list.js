@@ -1,17 +1,30 @@
-function activate() {
-    // Get the container element
+  const addItems = document.querySelector('.add-items');
+  const itemsList = document.querySelector('.exercises');
+ 
 
-    // Get all buttons with class="btn" inside the container
-    var btns = document.getElementsByClassName("nav-link");
+  function addItem(e){
 
-    // Loop through the buttons and add the active class to the current/clicked button
-    for (var i = 0; i < btns.length; i++) {
-        btns[i].addEventListener("click", function () {
-            var current = document.getElementsByClassName("active");
-            current[0].className = current[0].className.replace(" active", "");
-            this.className += " active";
-        });
-    }
-}
+    e.preventDefault(); //prevents refreshing of page
+    const text = (this.querySelector('[name=item]')).value;
+    const item = {
+      text 
+    };
+    items.push(item); //saving our submits
+    populateList(items, itemsList);
+    this.reset();
+  }
 
-activate();
+  function populateList(exs = [], exsList){
+    exsList.innerHTML = exs.map((ex, i) => {
+      return `
+        <li>
+          <input type="checkbox" data-index=${i} id="item${i}" ${ex.done ?
+          'checked' : ''} /> 
+          <label for="item${i}">${ex.text}</label>
+        </li>
+      `;
+    }).join('');
+  }
+addItems.addEventListener('submit', addItem);
+
+populateList(items, itemsList);

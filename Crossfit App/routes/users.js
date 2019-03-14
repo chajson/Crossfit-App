@@ -5,30 +5,41 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 //Landing
 router.get('/home', function (req, res) {
-    res.render('home')
+    res.render('home', {
+        home: true
+    });
 });
 //Register
 router.get('/register', function (req, res) {
-    res.render('register');
+    res.render('register', {
+        register: true
+    });
 });
 
 //Login
 router.get('/login', function (req, res) {
-    res.render('login');
+    res.render('login', {
+        login: true
+    });
 });
 
-router.get('/new', function (req, res) {
-    res.render('new');
+router.get('/newOne', function (req, res) {
+    res.render('newOne', {
+        dashboard: true
+    });
 });
 
 router.get('/update', function (req, res) {
-    res.render('update');
+    res.render('update', {
+        dashboard: true
+    });
 });
 
-router.get('/add_time', function (req, res) {
-    res.render('add_time');
+router.get('/times', function (req, res) {
+    res.render('times', {
+        times: true
+    });
 });
-
 
 
 //Register User
@@ -145,9 +156,55 @@ router.post('/NewWOD', function (req, res) {
     res.redirect('/users/dashboard');
 });
 
-router.get('/add_time', function(req, res){
-    var user = req.user;
-    var wods = u
+//finding training 
+
+router.get('/:id/addTime', function (req, res) {
+
+    User.findOne({
+        username: req.user.username
+    }, function (err, foundUser) {
+
+        var i = foundUser.wods.findIndex(function (wod) {
+            return wod._id == req.params.id
+        });
+        res.render('addTime', {
+            wod: foundUser.wods[i]
+        });
+    });
+});
+//adding time
+
+router.post('/:id/time', function (req, res) {
+
+    var time = req.body.time;
+
+    User.findOne({
+        username: req.user.username
+    }, function (err, foundUser) {
+
+        var i = foundUser.wods.findIndex(function (wod) {
+            return wod._id == req.params.id
+        });
+        foundUser.wods[i].time.push(time);
+        foundUser.save();
+        req.flash('success_msg', 'Czas został dodany!');
+        res.redirect('/users/dashboard');
+    });
+});
+
+router.get('/:id/showProgress', function (req, res) {
+
+    User.findOne({
+        username: req.user.username
+    }, function (err, foundUser) {
+
+        var i = foundUser.wods.findIndex(function (wod) {
+            return wod._id == req.params.id
+        });
+        res.render('showProgress', {
+            wod: foundUser.wods[i]
+        });
+    });
 });
 
 module.exports = router;
