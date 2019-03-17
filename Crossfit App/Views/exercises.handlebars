@@ -1,0 +1,14 @@
+{{#if user.wods}}
+    {{#each user.wods}}
+       <a href="/users/{{_id}}/addExercise">
+            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;float:left;padding:5px;margin-left:5px;">
+                <div class="card-body">
+                    <h5 class="card-title">{{name}}</h5>
+                    <p class="card-text"><ul>{{#each exercise}}<li>{{this}}</li>{{/each}}</ul></p>
+                </div>
+            </div>
+        </a>
+    {{/each}}
+{{else}}
+    <h4>nic tu nie ma</h4>
+{{/if}}

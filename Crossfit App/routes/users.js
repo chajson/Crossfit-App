@@ -41,6 +41,12 @@ router.get('/times', function (req, res) {
     });
 });
 
+router.get('/exercises', function (req, res) {
+    res.render('exercises', {
+        dashboard: true
+    });
+});
+
 
 //Register User
 router.post('/register', function (req, res) {
@@ -140,14 +146,15 @@ router.get('/logout', function (req, res) {
 router.post('/NewWOD', function (req, res) {
     var user = req.user;
     var username = user.username;
-    var exercises = req.body.item;
+    var name = req.body.item;
 
 
     User.findOne({
         username: username
     }).then(function (record) {
         record.wods.push({
-            exercise: exercises,
+            name: name,
+            exercise: [],
             time: []
         });
         record.save();
@@ -172,8 +179,41 @@ router.get('/:id/addTime', function (req, res) {
         });
     });
 });
-//adding time
+//finding training
+router.get('/:id/addExercise', function (req, res) {
 
+    User.findOne({
+        username: req.user.username
+    }, function (err, foundUser) {
+
+        var i = foundUser.wods.findIndex(function (wod) {
+            return wod._id == req.params.id
+        });
+        res.render('addExercise', {
+            wod: foundUser.wods[i]
+        });
+    });
+});
+
+//adding exercise
+router.post('/:id/exercise', function (req, res) {
+
+    var exercise = req.body.exercise;
+
+    User.findOne({
+        username: req.user.username
+    }, function (err, foundUser) {
+
+        var i = foundUser.wods.findIndex(function (wod) {
+            return wod._id == req.params.id
+        });
+        foundUser.wods[i].exercise.push(exercise);
+        foundUser.save();
+        req.flash('success_msg', 'Ćwiczenie zostało dodany!');
+        res.redirect('/users/exercises');
+    });
+});
+//adding time
 router.post('/:id/time', function (req, res) {
 
     var time = req.body.time;

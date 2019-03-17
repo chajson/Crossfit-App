@@ -1,0 +1,8 @@
+<div class="wod"> 
+    <h4>Dodaj ćwiczenia do tego treningu</h4>
+    <p></p>
+ <form class="input-group mb-3" method="POST" action="/users/{{wod._id}}/exercise">
+    <button style="color:white;" class="btn btn-outline-secondary" name="local" type="submit">Zatwierdź czas</button>
+  <input type="text" class="form-control" name="exercise" placeholder="Opisz swoje ćwiczenie" aria-label="" aria-describedby="basic-addon1" required onkeypress="return event.keyCode!=13">
+</form>
+</div>

@@ -1,30 +1,63 @@
 <h2>Zobacz jak twoje czasy są coraz krótsze. Widzisz progres?</h2>
-   <ul>
+<ul class="d-flex flex-column">
     {{#each wod.time}}
-       <li>{{this}}</li>
+        <li>{{this}}</li>
     {{/each}}
 </ul>
 
-<div id="chartContainer" style="height: 500px; width: 50%;"></div>
 
-<script type="text/javascript">
-      window.onload = function () {
-          var chart = new CanvasJS.Chart("chartContainer", {
-              data: [
-              {
-                  type: "column",
-                  dataPoints: [
-                  { x: 10, y: 10 },
-                  { x: 20, y: 15 },
-                  { x: 30, y: 25 },
-                  { x: 40, y: 30 },
-                  { x: 50, y: 28 }
-                  ]
-              }
-              ]
-          });
- 
-          chart.render();
-      }
-  </script>
 
+<div class="chart-cnt">
+    <canvas id="myChart" width="600" height="200"></canvas>
+</div>
+
+<script>
+    let data = {
+    labels: ["January", "February", "March", "April"],
+    datasets: [
+        {
+            label: "My First dataset",
+            //linia
+            //borderDash: [3, 3], //jezeli ustawione to przerywana linia
+            borderColor : 'rgba(236,115,87, 0.7)',
+            pointBorderColor : 'rgba(236,115,87, 0.7)',
+            borderWidth : 2,
+            //kolor tla i legendy
+            fill: true, //czy wypelnic zbior
+            backgroundColor : 'rgba(236,115,87, 0.1)', //wplywa tez na kolor w legendzie
+            //ustawienia punktu
+            pointRadius : 4,
+            pointBorderWidth : 1,
+            pointBackgroundColor : 'rgba(255,255,255,1)',
+            //ustawienia punktu hover
+            pointHoverRadius: 4,
+            pointHoverBorderWidth: 3,
+            pointHoverBackgroundColor : 'rgba(255,255,255,1)',
+            pointHoverBorderColor : 'rgba(236,115,87, 1)',
+            data: [50, 30, 40, 30, 32, 25, 30],
+        },
+        {
+            label: "My Second dataset",
+            borderColor : 'rgba(75,192,192, 0.7)',
+            ...
+            data: [65, 59, 80, 81, 56, 55, 40],
+        },
+        {
+            label: "My Third dataset",
+            borderColor : 'rgba(132,177,237, 0.7)',
+            ...
+            data: [30, 20, 60, 50, 42, 15, 40],
+        }
+    ]
+};
+
+let options = {
+};
+
+let ctx = document.getElementById("myChart").getContext("2d");;
+let myLineChart = new Chart(ctx, {
+    type: 'line',
+    data: data,
+    options: options
+});
+    </script>

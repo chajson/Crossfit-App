@@ -6,15 +6,17 @@
     <title>Crossfit App</title>
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+        <script type="text/javascript"  src="/node_modules/jquery/dist/jquery.min.js"></script>
 </head>
 
 <body>
 
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column justify-content-center">
         <header class="masthead mb-auto">
             <div class="inner">
-                <h3 class="masthead-brand">PrzeCROSS granice</h3>
-                <nav class="nav nav-masthead justify-content-center">
+                <h3 class="justify-content-start masthead-brand">PrzeCROSS granice</h3>
+                <nav class="nav-masthead nav">
                     {{#if user}}
                             <a class="nav-link{{#if dashboard}} active{{/if}}" href="/users/dashboard">Twoje treningi</a>
                             <a class="nav-link{{#if times}} active{{/if}}" href="/users/times">Moje czasy</a>
@@ -45,15 +47,15 @@
 
         <footer class="mastfoot mt-auto">
             <div class="inner">
-                <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+                <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a> edited by Piotr Chaja.</p>
             </div>
         </footer>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <script src="/js/bootstrap.js"></script>
-    <script src="/js/canvas/canvas.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/public/js/chart.js"></script>
+    
 </body>
 
 </html>
