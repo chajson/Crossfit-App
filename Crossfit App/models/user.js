@@ -7,16 +7,13 @@ const WodSchema = new Schema({
       type: String  
     },
     exercise:  [String],
-    time: [Number]
+    time: [String]
 });
 //User Schema
 const UserSchema = new Schema({
     username: {
         type: String,
         index: true
-    },
-    email: {
-        type: String
     },
     password: {
         type: String

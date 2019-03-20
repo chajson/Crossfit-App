@@ -1,21 +1,21 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var exprsHandlebars = require('express-handlebars');
-var exprsValidator = require('express-validator');
-var flash = require('connect-flash');
-var session = require('express-session');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var mongo = require('mongodb');
-var mongoose = require('mongoose');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const exprsHandlebars = require('express-handlebars');
+const exprsValidator = require('express-validator');
+const flash = require('connect-flash');
+const session = require('express-session');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const mongo = require('mongodb');
+const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/crossfitapp');
-var db = mongoose.connction;
-var Handlebars = require('handlebars');
+const db = mongoose.connction;
+const Handlebars = require('handlebars');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+const routes = require('./routes/index');
+const users = require('./routes/users');
 
 Handlebars.registerHelper("inc", function(value, options)
 {
@@ -23,7 +23,7 @@ Handlebars.registerHelper("inc", function(value, options)
 });
 
 //init app
-var app = express();
+const app = express();
 
 //view engine 
 app.set('views', path.join(__dirname, 'views'));
@@ -57,7 +57,7 @@ app.use(passport.session());
 //Express Validator
 app.use(exprsValidator({
     errorFormatter: function (param, msg, value) {
-        var namespace = param.split('.'),
+        const namespace = param.split('.'),
             root = namespace.shift(),
             formParam = root;
 
@@ -75,7 +75,7 @@ app.use(exprsValidator({
 //Connect Flash
 app.use(flash());
 
-//Global Vars
+//Global consts
 app.use(function(req ,res ,next){
     res.locals.success_msg = req.flash('success_msg');
     res.locals.eroor_msg = req.flash('error_msg');

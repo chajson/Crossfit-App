@@ -1,8 +1,8 @@
-var express = require('express');
-var router = express.Router();
-var User = require('../models/user')
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+const express = require('express');
+const router = express.Router();
+const User = require('../models/user')
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 //Landing
 router.get('/home', function (req, res) {
     res.render('home', {
@@ -50,26 +50,23 @@ router.get('/exercises', function (req, res) {
 
 //Register User
 router.post('/register', function (req, res) {
-    var email = req.body.email;
-    var username = req.body.username;
-    var password = req.body.password;
-    var password2 = req.body.password2;
+    let username = req.body.username;
+    let password = req.body.password;
+    let password2 = req.body.password2;
 
     //Validation
     req.checkBody('username', 'Username is requierd').notEmpty();
-    req.checkBody('email', 'Email is requierd').notEmpty();
     req.checkBody('password', 'Password is requierd').notEmpty();
     req.checkBody('password', 'Passwords do not match').equals(req.body.password);
 
-    var errors = req.validationErrors();
+    let errors = req.validationErrors();
 
     if (errors) {
         res.render('register', {
             errors: errors
         });
     } else {
-        var newUser = new User({
-            email: email,
+        let newUser = new User({
             username: username,
             password: password,
             wods: []
@@ -144,9 +141,9 @@ router.get('/logout', function (req, res) {
 
 //creating new training
 router.post('/NewWOD', function (req, res) {
-    var user = req.user;
-    var username = user.username;
-    var name = req.body.item;
+    let user = req.user;
+    let username = user.username;
+    let name = req.body.item;
 
 
     User.findOne({
@@ -171,7 +168,7 @@ router.get('/:id/addTime', function (req, res) {
         username: req.user.username
     }, function (err, foundUser) {
 
-        var i = foundUser.wods.findIndex(function (wod) {
+        let i = foundUser.wods.findIndex(function (wod) {
             return wod._id == req.params.id
         });
         res.render('addTime', {
@@ -186,7 +183,7 @@ router.get('/:id/addExercise', function (req, res) {
         username: req.user.username
     }, function (err, foundUser) {
 
-        var i = foundUser.wods.findIndex(function (wod) {
+        let i = foundUser.wods.findIndex(function (wod) {
             return wod._id == req.params.id
         });
         res.render('addExercise', {
@@ -198,13 +195,13 @@ router.get('/:id/addExercise', function (req, res) {
 //adding exercise
 router.post('/:id/exercise', function (req, res) {
 
-    var exercise = req.body.exercise;
+    let exercise = req.body.exercise;
 
     User.findOne({
         username: req.user.username
     }, function (err, foundUser) {
 
-        var i = foundUser.wods.findIndex(function (wod) {
+        let i = foundUser.wods.findIndex(function (wod) {
             return wod._id == req.params.id
         });
         foundUser.wods[i].exercise.push(exercise);
@@ -216,13 +213,13 @@ router.post('/:id/exercise', function (req, res) {
 //adding time
 router.post('/:id/time', function (req, res) {
 
-    var time = req.body.time;
+    let time = req.body.time;
 
     User.findOne({
         username: req.user.username
     }, function (err, foundUser) {
 
-        var i = foundUser.wods.findIndex(function (wod) {
+        let i = foundUser.wods.findIndex(function (wod) {
             return wod._id == req.params.id
         });
         foundUser.wods[i].time.push(time);
@@ -238,7 +235,7 @@ router.get('/:id/showProgress', function (req, res) {
         username: req.user.username
     }, function (err, foundUser) {
 
-        var i = foundUser.wods.findIndex(function (wod) {
+        let i = foundUser.wods.findIndex(function (wod) {
             return wod._id == req.params.id
         });
         res.render('showProgress', {

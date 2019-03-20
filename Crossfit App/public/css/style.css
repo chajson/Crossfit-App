@@ -103,7 +103,7 @@ body {
 }
 .card {
     width: 30em;
-    height: 15em;
+    min-height: 15em;
 }
 
 /*
