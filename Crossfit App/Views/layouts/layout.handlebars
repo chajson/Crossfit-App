@@ -20,12 +20,12 @@
                     {{#if user}}
                             <a class="nav-link{{#if dashboard}} active{{/if}}" href="/users/dashboard">Twoje treningi</a>
                             <a class="nav-link{{#if times}} active{{/if}}" href="/users/times">Moje czasy</a>
-                            <a class="nav-link" href="/users/logout">Log out</a>
+                            <a class="nav-link" href="/users/logout">Wyloguj</a>
                             <a class="nav-link" href="#">Zalogowano jako: {{user.username}}</a>
                     {{else}}
-                        <a class="nav-link{{#if home}} active{{/if}}" href="/users/home">Home</a>
-                        <a class="nav-link{{#if login}} active{{/if}}" href="/users/login">Log in</a>
-                        <a class="nav-link{{#if register}} active{{/if}}" href="/users/register">Register</a>
+                        <a class="nav-link{{#if home}} active{{/if}}" href="/users/home">Strona główna</a>
+                        <a class="nav-link{{#if login}} active{{/if}}" href="/users/login">Zaloguj</a>
+                        <a class="nav-link{{#if register}} active{{/if}}" href="/users/register">Rejestracja</a>
                     {{/if}}
 
                 </nav>
